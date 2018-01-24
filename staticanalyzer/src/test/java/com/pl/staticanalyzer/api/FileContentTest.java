@@ -28,6 +28,11 @@ public class FileContentTest {
         assertThat(fileContent.getLine(0)).isEqualTo("import java.io.Serializable;");
         assertThat(fileContent.getLine(1)).isBlank();
         assertThat(fileContent.getLine(2)).isEqualTo("public class Student implements Serializable {");
-        //System.out.println(fileContent.getLine(0));
+        System.out.println(fileContent.getLine(0));
+    }
+
+    @Test
+    public void shouldReturnedAllLinesWithReturnStatements() {
+        System.out.println(fileContent.findAllReturnStatement());
     }
 }

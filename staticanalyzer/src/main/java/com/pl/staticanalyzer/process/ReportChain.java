@@ -1,19 +1,24 @@
 package com.pl.staticanalyzer.process;
 
-import java.util.logging.Logger;
+import com.pl.staticanalyzer.report.Report;
 
 public class ReportChain implements GlobalChain {
 
     private GlobalChain globalChain;
+    private Report report;
 
-    public ReportChain(GlobalChain globalChain) {
-        this.globalChain = globalChain;
+    @Override
+    public void setNextChain(GlobalChain nextChain) {
+        this.globalChain = nextChain;
     }
 
     @Override
     public void process() {
-        Logger log = Logger.getLogger(ReportChain.class.getName());
-        log.info("REPORT_CHAIN_PROCESS");
-
+        Report report = new Report();
+        report.addError("someErrorAdded");
+        report.addError("someError2Added");
+        report.addWarning("someWarningAdded");
+        report.addWarning("someWarningAdded");
+        this.globalChain.process();
     }
 }

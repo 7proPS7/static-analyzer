@@ -1,11 +1,11 @@
-package com.pl.staticanalyzer.converter;
+package com.pl.staticanalyzer.invest;
 
 public class MessageLocalizator {
 
-    private int rowNumber;
+    private Integer rowNumber;
     private int colNumber;
 
-    public MessageLocalizator(int rowNumber, int colNumber) {
+    public MessageLocalizator(Integer rowNumber, int colNumber) {
         this.rowNumber = rowNumber;
         this.colNumber = colNumber;
     }

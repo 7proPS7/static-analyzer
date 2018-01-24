@@ -1,11 +1,13 @@
 package com.pl.staticanalyzer.api;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-import static com.pl.staticanalyzer.converter.FileLoader.load;
+import static com.pl.staticanalyzer.api.FileLoader.load;
 
 public class FileContent implements FileAnalyzable {
 
+    private static final String RETURN = "return";
     private List<String> content;
 
     public FileContent(final String fileName) {
@@ -49,4 +51,55 @@ public class FileContent implements FileAnalyzable {
     public String getFirstLineOfFile() {
         return content.get(0);
     }
+
+    @Override
+    public List<String> getFirstMethod() {
+        return content.subList(content.indexOf('('), content.indexOf(')'));
+    }
+
+    @Override
+    public List<String> getLastMethod() {
+        return content.subList(content.lastIndexOf('('), content.lastIndexOf(')'));
+    }
+
+    @Override
+    public String findAllPublicStaticFinalField() {
+        return null;
+    }
+
+    @Override
+    public String findStaticBody() {
+        return null;
+    }
+
+    @Override
+    public String findTryWithResources() {
+        return null;
+    }
+
+    @Override
+    public String findTryWithCatchBlock() {
+        return null;
+    }
+
+    @Override
+    public String findAllClasses() {
+        return null;
+    }
+
+    @Override
+    public String findAllInterfaces() {
+        return null;
+    }
+
+    @Override
+    public String findMethodBodyParameter() {
+        return null;
+    }
+
+    @Override
+    public List<String> findAllReturnStatement() {
+        return content.stream().filter(val -> val.contains(RETURN)).collect(Collectors.toList());
+    }
+
 }

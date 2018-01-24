@@ -1,4 +1,4 @@
-package com.pl.staticanalyzer.converter;
+package com.pl.staticanalyzer.api;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

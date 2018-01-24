@@ -2,17 +2,20 @@ package com.pl.staticanalyzer.process;
 
 public class ChainFactory {
 
-    private final GlobalChain globalChain;
+    private GlobalChain convert;
 
     public ChainFactory() {
-        this.globalChain = createGlobalChain();
-    }
+        this.convert = new ParserChain();
+        CheckChain check = new CheckChain();
+        ReportChain report = new ReportChain();
+        ConsoleOutputChain console = new ConsoleOutputChain();
 
-    public GlobalChain createGlobalChain() {
-        return new ConvertChain(new CheckChain(new ReportChain(new ConsoleOutputChain(this.globalChain))));
+        convert.setNextChain(check);
+        check.setNextChain(report);
+        report.setNextChain(console);
     }
 
     public void initProcess() {
-        globalChain.process();
+        this.convert.process();
     }
 }

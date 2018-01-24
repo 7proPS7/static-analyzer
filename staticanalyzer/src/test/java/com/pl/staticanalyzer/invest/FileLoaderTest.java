@@ -1,5 +1,6 @@
-package com.pl.staticanalyzer.converter;
+package com.pl.staticanalyzer.invest;
 
+import com.pl.staticanalyzer.api.FileLoader;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
