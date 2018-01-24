@@ -14,4 +14,24 @@ public interface FileAnalyzable {
     String getLastLineOfFile();
 
     String getFirstLineOfFile();
+
+    List<String> getFirstMethod();
+
+    List<String> getLastMethod();
+
+    String findAllPublicStaticFinalField();
+
+    String findStaticBody();
+
+    String findTryWithResources();
+
+    String findTryWithCatchBlock();
+
+    String findAllClasses();
+
+    String findAllInterfaces();
+
+    String findMethodBodyParameter();
+
+    List<String> findAllReturnStatement();
 }

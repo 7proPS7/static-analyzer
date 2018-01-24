@@ -1,12 +1,11 @@
 package com.pl.staticanalyzer.process;
 
-import com.pl.staticanalyzer.output.Output;
+import com.pl.staticanalyzer.api.FileContent;
 
-public class ConsoleOutputChain implements GlobalChain {
+public class ParserChain implements GlobalChain {
 
     private GlobalChain globalChain;
-    private Output output;
-
+    private FileContent content;
     @Override
     public void setNextChain(GlobalChain nextChain) {
         this.globalChain = nextChain;
@@ -14,8 +13,6 @@ public class ConsoleOutputChain implements GlobalChain {
 
     @Override
     public void process() {
-        output = new Output();
-        output.writeOnConsole();
-        // this.globalChain.process();
+        this.globalChain.process();
     }
 }
