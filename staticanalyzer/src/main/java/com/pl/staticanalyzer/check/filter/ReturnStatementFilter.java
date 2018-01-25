@@ -7,31 +7,31 @@ import com.pl.staticanalyzer.report.Report;
 import java.util.ArrayList;
 import java.util.List;
 
-class SecurityFilter implements Filter {
+class ReturnStatementFilter implements Filter {
     private final FileContent content;
     private final Report report;
 
-    SecurityFilter(FileContent content, Report report) {
+    ReturnStatementFilter(FileContent content, Report report) {
         this.content = content;
         this.report = report;
     }
 
     @Override
     public void filter() {
-        if (isPasswordVisible()) {
-            report.addError("Password is visible for everyone");
+        if (isReturnStatementNotCorrect(content)) {
+            report.addWarning("RETURN IN WRONG PLACE!");
         }
     }
 
     private List<Integer> localizations = new ArrayList<>();
 
-    private List<Integer> findLocalizationsOfPassword() {
-        content.findAllReturnStatement().forEach(val -> localizations.add(val.indexOf(ConstantValue.PASSWORD)));
+    private List<Integer> findLocalizationsOfReturnStatement() {
+        content.findAllReturnStatement().forEach(val -> localizations.add(val.indexOf(ConstantValue.RETURN)));
         return localizations;
     }
 
-    private boolean isPasswordVisible() {
-        List<Integer> values = findLocalizationsOfPassword();
+    private boolean isReturnStatementNotCorrect(FileContent content) {
+        List<Integer> values = findLocalizationsOfReturnStatement();
         Integer firstElem = localizations.get(0);
 
         for (int i = 1; i < localizations.size(); i++) {

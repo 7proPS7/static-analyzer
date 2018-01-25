@@ -1,5 +1,6 @@
 package com.pl.staticanalyzer.process;
 
+import com.pl.staticanalyzer.raport.builder.Raport;
 import com.pl.staticanalyzer.report.Report;
 
 public class ReportChain implements GlobalChain {
@@ -14,11 +15,8 @@ public class ReportChain implements GlobalChain {
 
     @Override
     public void process() {
-        Report report = new Report();
-        report.addError("someErrorAdded");
-        report.addError("someError2Added");
-        report.addWarning("someWarningAdded");
-        report.addWarning("someWarningAdded");
+        Raport error = new Raport.Builder().withId(0).withName("ERROR").build();
+        Raport warning= new Raport.Builder().withId(1).withName("WARNING").build();
         this.globalChain.process();
     }
 }
