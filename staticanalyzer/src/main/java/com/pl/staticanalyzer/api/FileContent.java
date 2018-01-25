@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.pl.staticanalyzer.api.FileLoader.load;
+import static com.pl.staticanalyzer.constant.ConstantValue.*;
 
 public class FileContent implements FileAnalyzable {
 
-    private static final String RETURN = "return";
+
+    public static final String TRY_WITH_RES = "try (";
     private List<String> content;
 
     public FileContent(final String fileName) {
@@ -63,18 +65,18 @@ public class FileContent implements FileAnalyzable {
     }
 
     @Override
-    public String findAllPublicStaticFinalField() {
-        return null;
+    public List<String> findAllPublicStaticFinalField() {
+        return getAllValueFor(PUBLIC_STATIC_FINAL);
     }
 
     @Override
-    public String findStaticBody() {
-        return null;
+    public List<String> findAllStaticBody() {
+        return getAllValueFor(STATIC_BODY);
     }
 
     @Override
-    public String findTryWithResources() {
-        return null;
+    public List<String> findAllTryWithResources() {
+        return getAllValueFor(TRY_WITH_RES);
     }
 
     @Override
@@ -83,23 +85,28 @@ public class FileContent implements FileAnalyzable {
     }
 
     @Override
-    public String findAllClasses() {
-        return null;
+    public List<String> findAllLineWithClasses() {
+        return getAllValueFor(CLASS);
     }
 
     @Override
-    public String findAllInterfaces() {
-        return null;
+    public List<String> findAllLineWithInterfaces() {
+        return getAllValueFor(IMPLEMENTS);
     }
 
     @Override
     public String findMethodBodyParameter() {
+
         return null;
     }
 
     @Override
     public List<String> findAllReturnStatement() {
-        return content.stream().filter(val -> val.contains(RETURN)).collect(Collectors.toList());
+        return getAllValueFor(RETURN);
+    }
+
+    private List<String> getAllValueFor(String value) {
+        return content.stream().filter(val -> val.contains(value)).collect(Collectors.toList());
     }
 
 }

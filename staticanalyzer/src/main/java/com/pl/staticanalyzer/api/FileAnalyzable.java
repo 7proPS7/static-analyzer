@@ -19,17 +19,17 @@ public interface FileAnalyzable {
 
     List<String> getLastMethod();
 
-    String findAllPublicStaticFinalField();
+    List<String> findAllPublicStaticFinalField();
 
-    String findStaticBody();
+    List<String> findAllStaticBody();
 
-    String findTryWithResources();
+    List<String> findAllTryWithResources();
 
     String findTryWithCatchBlock();
 
-    String findAllClasses();
+    List<String> findAllLineWithClasses();
 
-    String findAllInterfaces();
+    List<String> findAllLineWithInterfaces();
 
     String findMethodBodyParameter();
 

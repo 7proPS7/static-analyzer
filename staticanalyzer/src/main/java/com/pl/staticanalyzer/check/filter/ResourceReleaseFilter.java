@@ -1,23 +1,30 @@
 package com.pl.staticanalyzer.check.filter;
 
-import java.util.List;
+import com.pl.staticanalyzer.api.FileContent;
+import com.pl.staticanalyzer.report.Report;
 
-public class ResourceReleaseFilter implements Filter {
+import static com.pl.staticanalyzer.constant.ConstantValue.CLOSE;
 
-    private Filter filter;
+class ResourceReleaseFilter implements Filter {
 
-    public ResourceReleaseFilter(Filter filter) {
-        this.filter = filter;
+    private final FileContent content;
+    private final Report report;
+
+    ResourceReleaseFilter(FileContent content, Report report) {
+        this.content = content;
+        this.report = report;
+
     }
 
     @Override
-    public void filter(List<String> convertFile) {
-
+    public void filter() {
+        if (isCloseMethodInvoke(content)) {
+          report.addError("RESOURCE IS NEVER CLOSE!");
+        }
     }
 
-    private boolean isCloseMethodInvoke(List<String> convertFile) {
-
-        //convertFile
-        return true;
+    private boolean isCloseMethodInvoke(FileContent content) {
+        return content.getAllContent().contains(CLOSE);
     }
+
 }
