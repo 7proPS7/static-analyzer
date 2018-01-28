@@ -44,6 +44,6 @@ public class ReportTest {
             report.addWarning(insertedValue);
         }
 
-        assertThat(report.get(reportType).stream().toArray()).isEqualTo(expectedValue);
+        assertThat(report.get(reportType).toArray()).isEqualTo(expectedValue);
     }
 }

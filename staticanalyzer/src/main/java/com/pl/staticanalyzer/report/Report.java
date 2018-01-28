@@ -1,12 +1,16 @@
 package com.pl.staticanalyzer.report;
 
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Multimap;
+
 import java.util.Collection;
 
-import static com.pl.staticanalyzer.GlobalHashMap.reportMessages;
 import static com.pl.staticanalyzer.report.ReportType.ERROR;
 import static com.pl.staticanalyzer.report.ReportType.WARNING;
 
 public class Report {
+
+    private final static Multimap<ReportType, String> reportMessages = ArrayListMultimap.create();
 
     public Collection<String> get(ReportType type) {
         return reportMessages.get(type);
