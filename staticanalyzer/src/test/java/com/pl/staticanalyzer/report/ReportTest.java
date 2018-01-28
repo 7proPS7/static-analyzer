@@ -1,16 +1,22 @@
 package com.pl.staticanalyzer.report;
 
+import junitparams.JUnitParamsRunner;
+import junitparams.Parameters;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
 
 import static com.pl.staticanalyzer.report.ReportType.ERROR;
 import static com.pl.staticanalyzer.report.ReportType.WARNING;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(JUnit4.class)
+@RunWith(JUnitParamsRunner.class)
 public class ReportTest {
+    private static final String SOME_ERROR_VALUE = "someErrorValue";
+    private static final String SOME_ERROR_2_VALUE = "someError2Value";
+    private static final String EMPTY_STRING = "";
+    private static final String SOME_WARNING_VALUE = "someWarningValue";
+    private static final String SOME_WARNING_2_VALUE = "someWarning2Value";
 
     private Report report;
 
@@ -19,14 +25,25 @@ public class ReportTest {
         report = new Report();
     }
 
+    private Object[] returnedValueCalculate() {
+        return new Object[]{
+                new Object[]{ERROR, SOME_ERROR_VALUE, new String[]{SOME_ERROR_VALUE}},
+                new Object[]{ERROR, SOME_ERROR_2_VALUE, new String[]{SOME_ERROR_VALUE, SOME_ERROR_2_VALUE}},
+                new Object[]{WARNING, SOME_WARNING_VALUE, new String[]{SOME_WARNING_VALUE}},
+                new Object[]{WARNING, SOME_WARNING_2_VALUE, new String[]{SOME_WARNING_VALUE, SOME_WARNING_2_VALUE}}
+        };
+    }
+
     @Test
-    public void shouldReturnedErrorsFromReportIfNotThenNull() {
-        assertThat(report.get(WARNING).get(0)).isEqualTo("INITIAL_WARNING");
+    @Parameters(method = "returnedValueCalculate")
+    public void shouldReturnedValueByReportType(ReportType reportType, String insertedValue, String[] expectedValue) {
 
-        report.addError("ERROR1");
-        assertThat(report.get(ERROR).get(1)).isEqualTo("ERROR1");
+        if (reportType.equals(ERROR)) {
+            report.addError(insertedValue);
+        } else if (reportType.equals(WARNING)) {
+            report.addWarning(insertedValue);
+        }
 
-        report.addError("ERROR2");
-        assertThat(report.get(ERROR).get(2));
+        assertThat(report.get(reportType).stream().toArray()).isEqualTo(expectedValue);
     }
 }
