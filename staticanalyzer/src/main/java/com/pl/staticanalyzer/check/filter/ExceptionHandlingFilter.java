@@ -3,6 +3,8 @@ package com.pl.staticanalyzer.check.filter;
 import com.pl.staticanalyzer.api.FileContent;
 import com.pl.staticanalyzer.report.Report;
 
+import java.util.List;
+
 class ExceptionHandlingFilter implements Filter {
     private final FileContent content;
     private final Report report;
@@ -14,12 +16,13 @@ class ExceptionHandlingFilter implements Filter {
 
     @Override
     public void filter() {
-        if (isSomeException(content)) {
-            report.addError("EXCEPTION is throw");
+        List<String> exceptions = getExceptionLines(content);
+        if (exceptions.size() > 0) {
+            exceptions.forEach(val -> report.addError("EXCEPTION " + val.trim()));
         }
     }
 
-    private boolean isSomeException(FileContent content) {
-        return true;
+    private List<String> getExceptionLines(FileContent content) {
+        return content.findAllException();
     }
 }

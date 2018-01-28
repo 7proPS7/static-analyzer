@@ -8,6 +8,7 @@ public class ConstantValue {
     public static final String PUBLIC_STATIC_FINAL = "public static final";
     public static final String CLOSE = "close()";
     public static final String PASSWORD = "password";
+    public static final String THROW = "throw";
     public static final int STATIC = 11;
     public static final int FINAL = 12;
     public static final int DEFAULT = 13;

@@ -21,12 +21,17 @@ public class Student implements Serializable {
 
     @Override
     public String toString() {
-         return "Student{Name: " + firstName + ", SecondName: " + secondName + ", LastName: " + lastName + ", Age: " + age + ", Height: " + height + ", Edition: " + edition;
+        return "Student{Name: " + firstName + ", SecondName: " + secondName + ", LastName: " + lastName + ", Age: " + age + ", Height: " + height + ", Edition: " + edition;
     }
 
     public int add(int a, int b) {
         return a + b;
     }
 
-
+    public double div(int a, int b) {
+        b = 0;
+        if (a / b) {
+            throw new ArithmeticException("Nie dziel przez zero!");
+        }
+    }
 }

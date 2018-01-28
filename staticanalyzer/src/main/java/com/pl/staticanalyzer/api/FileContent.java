@@ -107,4 +107,7 @@ public class FileContent implements FileAnalyzable {
         return content.stream().filter(val -> val.contains(value)).collect(Collectors.toList());
     }
 
+    public List<String> findAllException() {
+        return getAllValueFor(THROW);
+    }
 }
