@@ -7,9 +7,7 @@ import static com.pl.staticanalyzer.api.FileLoader.load;
 import static com.pl.staticanalyzer.constant.ConstantValue.*;
 
 public class FileContent implements FileAnalyzable {
-
-
-    public static final String TRY_WITH_RES = "try (";
+    private static final String TRY_WITH_RES = "try (";
     private List<String> content;
 
     public FileContent(final String fileName) {

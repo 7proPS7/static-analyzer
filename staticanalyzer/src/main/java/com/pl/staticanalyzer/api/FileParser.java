@@ -5,7 +5,6 @@ import java.util.List;
 public class FileParser extends FileContent implements SinglePartAnalyzer {
 
 
-
     public FileParser(String fileName) {
         super(fileName);
     }
@@ -18,36 +17,36 @@ public class FileParser extends FileContent implements SinglePartAnalyzer {
 
     @Override
     public String analyzingStaticBody() {
-        return null;
+        return findAllStaticBody().get(0);
     }
 
     @Override
     public String analyzingTryWithResources() {
-        return null;
+        return findAllTryWithResources().get(0);
     }
 
     @Override
     public String analyzingTryWithCatchBlock() {
-        return null;
+        return findTryWithCatchBlock();
     }
 
     @Override
     public String analyzingLineWithClasses() {
-        return null;
+        return findAllLineWithClasses().get(0);
     }
 
     @Override
     public String analyzingLineWithInterfaces() {
-        return null;
+        return findAllLineWithInterfaces().get(0);
     }
 
     @Override
     public String analyzingMethodBodyParameter() {
-        return null;
+        return findMethodBodyParameter();
     }
 
     @Override
     public String analyzingReturnStatement() {
-        return null;
+        return findAllReturnStatement().get(0);
     }
 }
