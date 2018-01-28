@@ -34,4 +34,11 @@ public class Student implements Serializable {
             throw new ArithmeticException("Nie dziel przez zero!");
         }
     }
+
+    public Integer parseToInt(String value) {
+        if (value.matches("\\d+")) {
+            return Integer.parseInt(value);
+        }
+        throw NumberFormatException("String is not number")
+    }
 }
