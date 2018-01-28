@@ -11,7 +11,6 @@ public class OutputTest {
     @Before
     public void setUp() {
         report = new Report();
-        output = new Output();
     }
 
     @Test
@@ -20,6 +19,7 @@ public class OutputTest {
         report.addError("Popelniono blad w 4 lini");
         report.addError("Popelniono blad w 5 lini");
         report.addError("Popelniono blad w 6 lini");
+        output = new Output(report);
 
         output.writeOnConsole();
     }

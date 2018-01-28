@@ -1,7 +1,7 @@
 package com.pl.staticanalyzer.process;
 
-public interface GlobalChain {
+public interface GlobalChain<T> {
     void setNextChain(GlobalChain nextChain);
 
-    void process();
+    void process(T t);
 }
