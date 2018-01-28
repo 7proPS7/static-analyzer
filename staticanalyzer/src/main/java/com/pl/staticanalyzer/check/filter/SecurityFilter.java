@@ -10,10 +10,12 @@ import java.util.List;
 class SecurityFilter implements Filter {
     private final FileContent content;
     private final Report report;
+    private List<Integer> localizations;
 
     SecurityFilter(FileContent content, Report report) {
         this.content = content;
         this.report = report;
+        localizations = new ArrayList<>();
     }
 
     @Override
@@ -22,8 +24,6 @@ class SecurityFilter implements Filter {
             report.addError("Password is visible for everyone");
         }
     }
-
-    private List<Integer> localizations = new ArrayList<>();
 
     private List<Integer> findLocalizationsOfPassword() {
         content.findAllReturnStatement().forEach(val -> localizations.add(val.indexOf(ConstantValue.PASSWORD)));
