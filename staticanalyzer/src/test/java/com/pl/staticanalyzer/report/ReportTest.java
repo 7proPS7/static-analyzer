@@ -14,7 +14,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ReportTest {
     private static final String SOME_ERROR_VALUE = "someErrorValue";
     private static final String SOME_ERROR_2_VALUE = "someError2Value";
-    private static final String EMPTY_STRING = "";
     private static final String SOME_WARNING_VALUE = "someWarningValue";
     private static final String SOME_WARNING_2_VALUE = "someWarning2Value";
 
@@ -46,4 +45,19 @@ public class ReportTest {
 
         assertThat(report.get(reportType).toArray()).isEqualTo(expectedValue);
     }
+
+    private Object[] returnedMissingValueCalculate() {
+        return new Object[]{
+                new Object[]{ERROR},
+                new Object[]{WARNING}
+        };
+    }
+
+    @Test
+    @Parameters(method = "returnedMissingValueCalculate")
+    public void shouldReturnedEmptyValueIfNonElementInReport(ReportType reportType) {
+        report.clear();
+        assertThat(report.get(reportType)).isEmpty();
+    }
+
 }
