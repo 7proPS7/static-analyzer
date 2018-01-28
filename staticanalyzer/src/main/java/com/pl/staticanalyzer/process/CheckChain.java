@@ -6,14 +6,7 @@ import com.pl.staticanalyzer.check.filter.FilterFactory;
 import com.pl.staticanalyzer.report.Report;
 
 public class CheckChain implements GlobalChain {
-    private FileContent content;
-    private Report report;
     private GlobalChain globalChain;
-
-    public CheckChain(FileContent content, Report report) {
-        this.content = content;
-        this.report = report;
-    }
 
     @Override
     public void setNextChain(GlobalChain nextChain) {
@@ -21,10 +14,13 @@ public class CheckChain implements GlobalChain {
     }
 
     @Override
-    public void process() {
-        FilterFactory factory = new FilterFactory(content, report);
-        factory.getAllFilter().forEach(Filter::filter);
-
-        this.globalChain.process();
+    public void process(Object obj) {
+        Report report = new Report();
+        if (obj instanceof FileContent) {
+            FilterFactory factory = new FilterFactory((FileContent) obj, report);
+            factory.getAllFilter().forEach(Filter::filter);
+            this.globalChain.process(report);
+        }
+        this.globalChain.process(new CheckChain());
     }
 }

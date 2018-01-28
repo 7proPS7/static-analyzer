@@ -9,11 +9,9 @@ public class ChainFactory {
     private FileContent content;
     private Report reports;
 
-
-
-    public ChainFactory(FileContent content, Report reports) {
-        this.convert = new ParserChain();
-        CheckChain check = new CheckChain(content,reports);
+    public ChainFactory() {
+        this.convert = new LoaderChain();
+        CheckChain check = new CheckChain();
         ReportChain report = new ReportChain();
         ConsoleOutputChain console = new ConsoleOutputChain();
 
@@ -22,8 +20,8 @@ public class ChainFactory {
         report.setNextChain(console);
     }
 
-    public void initProcess() {
-        this.convert.process();
+    public void initProcess(FileContent content) {
+        this.convert.process(content);
     }
 
     public void initProcess(String filePath) {

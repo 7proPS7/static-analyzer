@@ -19,4 +19,8 @@ public class Report {
     public void addError(String value) {
         reportMessages.put(ERROR, value.trim());
     }
+
+    public void clear() {
+        reportMessages.clear();
+    }
 }
